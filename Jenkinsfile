@@ -40,6 +40,28 @@ pipeline {
 		// 		sh "mvn failsafe:integration-test failsafe:verify"
 		// 	}
 		// }
+		stage('package') {
+			steps {
+				sh "mvn package"
+			}
+		}
+		stage('build docker image'){
+			steps{
+				script {
+					dockerImage = docker.build("anitajinu/currency-exchange-devops:{$env.BUILD_TAG}")
+				}
+			}
+		}
+		stage('push docker image'){
+			steps{
+				script {
+					docker.withRegistry('' , 'Dockerhub') {
+						dockerImage.push('latest');
+					}
+				}
+
+			}
+		}
 	
 	}
 	post{
