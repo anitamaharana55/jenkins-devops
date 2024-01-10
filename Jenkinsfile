@@ -1,14 +1,20 @@
 // Declarative pipeline
 pipeline {
-	// agent any
-	agent {
-		docker { image 'node:20.10.0-alpine3.19' }
-	}
+	agent any
+	// agent {
+	// 	docker { image 'node:20.10.0-alpine3.19' }
+	// }
 	stages{
 		stage("build") {
 			steps {
-				sh 'node --version'
 				echo "Build"
+				echo "PATH - $PATH"
+				echo "BIULD_NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "JOB_NAME - $env.JOB_NAME"
+				echo "BUILD_TAG - $env.BUILD_TAG"
+				echo "BUILD_URL - $env.BUILD_URL"
+
 			}
 		}
 		stage("Test") {
