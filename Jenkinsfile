@@ -24,14 +24,20 @@ pipeline {
 
 			}
 		}
+		stage("compile") {
+			steps {
+				sh "mvn clean compile"
+			}
+
+		}
 		stage("Test") {
 			steps {
-				echo "Test"
+				sh "mvn test"
 			}
 		}
 		stage("Integration Test") {
 			steps {
-				echo "Integration Test"
+				sh "mvn failsafe:inegratin-test failsafe:verify"
 			}
 		}
 	
