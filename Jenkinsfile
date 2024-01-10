@@ -48,7 +48,7 @@ pipeline {
 		stage('build docker image'){
 			steps{
 				script {
-					dockerImage = docker.build("anitajinu/currency-exchange-devops:{$env.BUILD_TAG}")
+					dockerImage = docker.build("anitajinu/currency-exchange-devops:${env.BUILD_TAG}")
 				}
 			}
 		}
